@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { nanoid } from 'nanoid';
 import data from "./Components/mock-data.json";
 
 const App = () => {

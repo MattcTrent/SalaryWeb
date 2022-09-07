@@ -1,7 +1,7 @@
-import React from "react"
-import data from "./Components/mock-data.json"
+import React, { useState } from "react"
+import data from "./mock-data.json"
 
-const App = () => {
+export const SalaryTable = () => {
 
     const [salaries, setSalaries] = useState(data);
     const [addSalaryData, setAddSalary] = useState (

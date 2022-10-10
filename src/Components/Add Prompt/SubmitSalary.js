@@ -1,5 +1,6 @@
-import React, { useState } from "react"
-import data from "./mock-data.json"
+import React, { useState } from "react";
+import data from "./mock-data.json";
+import './Table.css';
 
 export const SalaryTable = () => {
 
@@ -45,30 +46,6 @@ export const SalaryTable = () => {
           <input type="number" name="salary" required="required" placeholder="0" onChange={handleAddSalary}/>
           <button type="submit"> Submit </button>
         </form>
-          <table>
-              <thead>
-                  <tr>
-                      <th></th>
-                      <th>Yearly</th>
-                      <th>Monthly</th>
-                      <th>Weekly</th>
-                      <th>Daily</th>
-                      <th>Hourly</th>
-                  </tr>
-              </thead>
-              <tbody>
-                {salaries.map((salary) => 
-                    <tr>
-                    <td>{salary.name}</td>
-                    <td>{salary.salary}</td>
-                    <td>{(salary.salary/12).toFixed(2)}</td>
-                    <td>{(salary.salary/52).toFixed(2)}</td>
-                    <td>{(salary.salary/365).toFixed(2)}</td>
-                    <td>{((salary.salary/365)/7.5).toFixed(2)}</td>
-                </tr>
-                )}
-              </tbody>
-          </table>
       </div>
     )
 }

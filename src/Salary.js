@@ -1,9 +1,9 @@
 import React from "react";
-import { SalaryTable } from "./Components/Table";
+import { TableList } from "./Components/Table/TableList";
 
 const App = () => {
   return (
-    <SalaryTable></SalaryTable>
+    <TableList></TableList>
   )
 }
 

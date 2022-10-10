@@ -1,0 +1,33 @@
+[
+    {
+        "name" : "Matt",
+        "salary" : 40000,
+        "salaryPSF" : 38400,
+        "pension" : 1600,
+        "taxFree" : 12570,
+        "taxable" : 25938.60,
+        "tax" : 5187.72,
+        "ni" : 3421.68,
+        "studentLoanThresh" : 27275,
+        "studentLoan" : 1001,
+        "salarySS" : 1600,
+        "takeHome" : 28490.08,
+        "postOutgoings" : 4337.07
+    },
+    
+    {
+        "name" : "Alison",
+        "salary" : 40000,
+        "salaryPSF" : 38400,
+        "pension" : 1600,
+        "taxFree" : 12570,
+        "taxable" : 25938.60,
+        "tax" : 5187.72,
+        "ni" : 3421.68,
+        "studentLoanThresh" : 27275,
+        "studentLoan" : 1001,
+        "salarySS" : 1600,
+        "takeHome" : 28490.08,
+        "postOutgoings" : 4337.07
+    }
+]

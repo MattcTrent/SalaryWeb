@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import data from "./mock-data.json";
+import data from "./mock-TableData.json";
 import { SalaryTable } from './Table.js';
 
 export const TableList = () => {

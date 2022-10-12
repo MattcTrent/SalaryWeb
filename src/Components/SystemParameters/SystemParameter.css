@@ -1,0 +1,18 @@
+.SystemParameterRow {
+    display : flex;
+}
+
+.SystemParameterRow p {
+    width : 200px;
+    height: 10px;
+}
+
+.ParameterTable {
+    background-color:rgb(167, 167, 167);
+    border-radius: 10px;
+    border : solid black 2px ;
+    width: 50%;
+    margin: 10px;
+    padding: 5px;
+    border-collapse: separate;
+}

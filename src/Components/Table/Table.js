@@ -5,11 +5,9 @@ import { DataRow } from './DataRow.js';
 export const SalaryTable = (props) => {
     return (
           <div>
-
           <p className="TableTitle">{props.person.name}</p>
-          
-          <table className="OuterTable">  
-          <table className="SalaryTable">
+          <div className="OuterTable">  
+          <table key={props.person.Id} className="SalaryTable">
               <thead>
                 <tr>
                     <th></th>
@@ -35,7 +33,7 @@ export const SalaryTable = (props) => {
               <DataRow rowName='After Rent and Outgoings' rowValue={props.person.postOutgoings} />
               </tbody>
           </table>
-          </table>
+          </div>
           </div>
     )
 }

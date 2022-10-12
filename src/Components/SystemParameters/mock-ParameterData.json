@@ -18,19 +18,19 @@
         "ParameterValue" : "45"
     },
     {
-        "ParameterId" : "1",
+        "ParameterId" : "4",
         "ParameterGroup" : "NI Rate",
         "ParameterName" : "Basic",
         "ParameterValue" : "20"
     },
     {
-        "ParameterId" : "2",
+        "ParameterId" : "5",
         "ParameterGroup" : "NI Rate",
         "ParameterName" : "Higher",
         "ParameterValue" : "40"
     },
     {
-        "ParameterId" : "3",
+        "ParameterId" : "6",
         "ParameterGroup" : "NI Rate",
         "ParameterName" : "Additional",
         "ParameterValue" : "45"

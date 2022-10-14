@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Pages/Layout";
 import Home from "./Pages/Home";
 import SalaryBreakdown from "./Pages/SalaryBreakdown";
-import SystemParameters from "./Pages/SystemParameters";
+import { SystemParameters } from "./Pages/SystemParameters";
 import NoPage from "./Pages/NoPage";
 
 export default function App() {

@@ -4,7 +4,7 @@ import { DataRow } from './DataRow.js';
 
 export const SalaryTable = (props) => {
     return (
-          <div>
+          <>
           <p className="TableTitle">{props.person.name}</p>
           <div className="OuterTable">  
           <table key={props.person.Id} className="SalaryTable">
@@ -34,6 +34,6 @@ export const SalaryTable = (props) => {
               </tbody>
           </table>
           </div>
-          </div>
+          </>
     )
 }

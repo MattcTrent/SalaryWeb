@@ -1,34 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import './SystemParameter.css';
 
 export const SystemParameter = (props) => {
-
-
-    const [addParameterData, setAddParameter] = useState(
-        {
-            name: '',
-            salary: ''
-        }
-    )
-
-    const handleUpdateParameter = (event) => {
-        event.preventDefault();
-
-        const fieldName = event.target.getAttribute('name');
-        const fieldValue = event.target.value;
-
-        const newParameter = { ...addParameterData };
-        newParameter[fieldName] = fieldValue;
-        setAddParameter(newParameter);
-    }
-
     return (
         <tr>
+            <td key={props.parameter.id} className="SystemParameterRow">
+                <p className="NameTag" >{props.parameter.name}</p>
+            </td>
             <td>
-                <form key={props.parameter.ParameterId} className="SystemParameterRow">
-                    <p>{props.parameter.ParameterName}</p>
-                    <input type="number" name="salary" required="required" placeholder="0" defaultValue={props.parameter.ParameterValue} onChange={handleUpdateParameter} />
-                </form>
+                <input type="number" name="Rate" required="required" placeholder="0" defaultValue={props.parameter.rate} />
+            </td>
+            <td>
+                <input type="number" name="Lower Threshold" placeholder="0" defaultValue={props.parameter.lowerThreshold} />
+            </td>
+            <td>
+                <input type="number" name="UpperThreshold" placeholder="0" defaultValue={props.parameter.upperThreshold} />
             </td>
         </tr>
     )

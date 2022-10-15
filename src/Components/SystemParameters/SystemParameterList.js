@@ -1,41 +1,38 @@
-import React, { useState } from "react";
 import { SystemParameterGroup } from './SystemParameterGroup.js';
-import { SystemParameterService } from "../../API/Services/SystemParameterService.js";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
+import { useEffect } from 'react';
+import { variables } from '../../API/Variables.js';
+import { setSystemParameters } from '../../Redux/Actions/SystemParameterActions.js';
 
 
 export const SystemParameterList = () => {
 
-  const [systemParameters, setSystemParameters] = useState([])
-  const [uniqueGroups, setuniqueGroups] = useState([])
+  const systemParameters = useSelector((state) => state.allSystemParameters.systemParameters);  
+  const dispatch = useDispatch();
 
+  const uniqueGroups = ([...new Set(systemParameters.map(item => item.group))]);
 
-  const refreshSystemParameters = () => {
-    SystemParameterService.getSystemParameters().then((response) => {
-      if (response.data) {
-        setSystemParameters(response.data)
-      }
+  const fetchSystemParameters= async () => {
+    const apiURL = variables.API_URL+"/SystemParameters";
+    const response = await axios.get(apiURL).catch((error) => {
+      console.log("Error", error)
     });
-    if (systemParameters != null)
-    {
-    setuniqueGroups([...new Set(systemParameters.map(item => item.ParameterGroup))])
-    }
-  }
+
+    dispatch(setSystemParameters(response.data));
+  };
 
   useEffect(() => {
-    refreshSystemParameters();
+    fetchSystemParameters();
   });
-
 
   return (
     <>
+
       <h2 className="PageHeader">System Parameters</h2>
       <div className="ParameterGroups">
-        
-      {console.log("SP"+systemParameters)}
-        {console.log(uniqueGroups)}
         {uniqueGroups.map((groupName) =>
-          <SystemParameterGroup group={groupName} parameters={systemParameters.filter(filterParameters => filterParameters.ParameterGroup === groupName)} />
+          <SystemParameterGroup key={groupName} group={groupName} parameters={systemParameters.filter(filterParameters => filterParameters.group === groupName)} />
         )}
       </div>
     </>

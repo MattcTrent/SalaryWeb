@@ -1,10 +1,6 @@
-.SystemParameterRow {
-    display : flex;
-}
-
-.SystemParameterRow p {
-    width : 200px;
-    height: 10px;
+.NameTag {
+    width : 150px;
+    height: 5px;
 }
 
 .ParameterTable {

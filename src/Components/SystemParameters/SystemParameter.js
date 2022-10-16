@@ -1,20 +1,36 @@
 import React from "react";
 import './SystemParameter.css';
+import { MdDelete } from "react-icons/md"
+import { BiEdit } from "react-icons/bi"
+
 
 export const SystemParameter = (props) => {
     return (
-        <tr>
-            <td key={props.parameter.id} className="SystemParameterRow">
+        <tr key={props.parameter.id}>
+            <td className="editTag" >
+                <button>
+                    <BiEdit size={25} />
+                </button>
+            </td>
+            <td >
+                <p className="NameTag" >{props.parameter.group}</p>
+            </td>
+            <td >
                 <p className="NameTag" >{props.parameter.name}</p>
             </td>
             <td>
-                <input type="number" name="Rate" required="required" placeholder="0" defaultValue={props.parameter.rate} />
+                <p>{props.parameter.rate}</p>
             </td>
             <td>
-                <input type="number" name="Lower Threshold" placeholder="0" defaultValue={props.parameter.lowerThreshold} />
+                <p>{props.parameter.lowerThreshold}</p>
             </td>
             <td>
-                <input type="number" name="UpperThreshold" placeholder="0" defaultValue={props.parameter.upperThreshold} />
+                <p>{props.parameter.upperThreshold}</p>
+            </td>
+            <td className="deleteTag">
+                <button>
+                    <MdDelete size={25} />
+                </button>
             </td>
         </tr>
     )

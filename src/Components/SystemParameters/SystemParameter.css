@@ -1,16 +1,77 @@
 .NameTag {
-    width : 150px;
-    height: 5px;
+    width : 100px;
+}
+
+.editTag, .deleteTag {
+    text-align: center;
+    width : 30px;
+}
+
+/*This line adjusts styling of the icons*/
+svg {
+    vertical-align: middle;
 }
 
 .ParameterTable {
-    background-color:rgb(167, 167, 167);
+    background-color:black;
     border-radius: 10px;
     border : solid black 2px ;
     width: 50%;
     margin: 10px;
-    padding: 5px;
+    padding: 2px;
     border-collapse: separate;
+}
+
+.ParametersBanner {
+    background-color:rgb(107, 107, 107);
+    border : solid black 2px ;
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2px;
+    border-collapse: separate;
+    display: flex;
+}
+
+.ParametersBannerBtn {
+    background-color:rgb(190, 190, 190);
+    margin: 10px;
+    display: flex;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.ParametersBannerBtn:hover {
+    background-color:white;
+}
+
+.ParametersBannerBtn:active {
+    background-color:rgb(68, 68, 68);
+    -webkit-text-fill-color: white;
+}
+
+.ParametersBannerBtn {
+    background-color:rgb(190, 190, 190);
+    margin: 10px;
+    display: flex;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.ParametersBannerBtn p {
+    height: 5px;
+    vertical-align: middle;
+}
+
+.ParameterTableHead {
+    background-color:black;
+    -webkit-text-fill-color: white;
+}
+
+.ParameterTableBody {
+    background-color:white;
 }
 
 .SystemParameterTitle {
@@ -28,13 +89,4 @@
 
 .ParameterTable {
     margin: auto;
-}
-
-.ParameterGroup {
-margin : 5px;
-}
-
-.ParameterGroups {
-display: flex;
-flex-wrap: wrap;
 }

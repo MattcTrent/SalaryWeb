@@ -10,10 +10,10 @@ function Navbar() {
           <Link className="NavBarLink" to="/">Home</Link>
         </li>
         <li className="NavBarCell">
-          <Link className="NavBarLink" to="/SalaryBreakdown">SalaryBreakdown</Link>
+          <Link className="NavBarLink" to="/SalaryBreakdown">Salary Breakdown</Link>
         </li>
         <li className="NavBarCell">
-          <Link className="NavBarLink" to="/SystemParameters">SystemParameters</Link>
+          <Link className="NavBarLink" to="/SystemParameters">System Parameters</Link>
         </li>
       </ul>
     </nav>

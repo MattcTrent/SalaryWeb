@@ -1,4 +1,6 @@
-import { SystemParameterGroup } from './SystemParameterGroup.js';
+import { SystemParameterBanner } from './SystemParameterBanner.js';
+import { SystemParameter } from './SystemParameter.js';
+import { SystemParameterHeader } from './SystemParameterHeader.js';
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -8,13 +10,11 @@ import { setSystemParameters } from '../../Redux/Actions/SystemParameterActions.
 
 export const SystemParameterList = () => {
 
-  const systemParameters = useSelector((state) => state.allSystemParameters.systemParameters);  
+  const systemParameters = useSelector((state) => state.allSystemParameters.systemParameters);
   const dispatch = useDispatch();
 
-  const uniqueGroups = ([...new Set(systemParameters.map(item => item.group))]);
-
-  const fetchSystemParameters= async () => {
-    const apiURL = variables.API_URL+"/SystemParameters";
+  const fetchSystemParameters = async () => {
+    const apiURL = variables.API_URL + "/SystemParameters";
     const response = await axios.get(apiURL).catch((error) => {
       console.log("Error", error)
     });
@@ -28,12 +28,20 @@ export const SystemParameterList = () => {
 
   return (
     <>
-
       <h2 className="PageHeader">System Parameters</h2>
-      <div className="ParameterGroups">
-        {uniqueGroups.map((groupName) =>
-          <SystemParameterGroup key={groupName} group={groupName} parameters={systemParameters.filter(filterParameters => filterParameters.group === groupName)} />
-        )}
+
+      <div className="ParameterGroup">
+        <SystemParameterBanner />
+        <table className="ParameterTable">
+          <thead className='ParameterTableHead'>
+            <SystemParameterHeader />
+          </thead>
+          <tbody className='ParameterTableBody'>
+            {systemParameters.map((parameter) =>
+              <SystemParameter key={parameter.Id} parameter={parameter} />
+            )}
+          </tbody>
+        </table>
       </div>
     </>
   )

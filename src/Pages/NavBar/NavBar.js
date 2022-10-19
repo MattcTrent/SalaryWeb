@@ -1,23 +1,29 @@
 import React from "react";
 import "./NavBar.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 function Navbar() {
+  const [value, setValue] = React.useState("/");
+  let navigate = useNavigate();
+
+  const handleChange = (event, newValue) => {
+    console.log(newValue);
+    setValue(newValue);
+    navigate(newValue);
+  };
+
   return (
-    <nav className="NavBar">
-      <ul className="NavBarRow">
-        <li className="NavBarCell">
-          <Link className="NavBarLink" to="/">Home</Link>
-        </li>
-        <li className="NavBarCell">
-          <Link className="NavBarLink" to="/SalaryBreakdown">Salary Breakdown</Link>
-        </li>
-        <li className="NavBarCell">
-          <Link className="NavBarLink" to="/SystemParameters">System Parameters</Link>
-        </li>
-      </ul>
-    </nav>
+    <>
+      <Tabs value={value} onChange={handleChange} centered>
+        <Tab label="Home" value="/" />
+        <Tab label="Salary Breakdown" value="/SalaryBreakdown" />
+        <Tab label="System Parameters" value="/SystemParameters" />
+      </Tabs>
+    </>
   );
 }
+
 
 export default Navbar;

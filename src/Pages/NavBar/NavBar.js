@@ -9,7 +9,6 @@ function Navbar() {
   let navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
-    console.log(newValue);
     setValue(newValue);
     navigate(newValue);
   };

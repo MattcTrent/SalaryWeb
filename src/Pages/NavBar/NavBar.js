@@ -17,9 +17,9 @@ function Navbar() {
   return (
     <>
       <Tabs value={value} onChange={handleChange} centered>
-        <Tab label="Home" value="/" />
-        <Tab label="Salary Breakdown" value="/SalaryBreakdown" />
-        <Tab label="System Parameters" value="/SystemParameters" />
+        <Tab sx={{ width: 1, fontSize: 25}}  label="Home" value="/" />
+        <Tab sx={{ width: 1, fontSize: 25}} label="Salary Breakdown" value="/SalaryBreakdown" />
+        <Tab sx={{ width: 1, fontSize: 25}}  label="System Parameters" value="/SystemParameters" />
       </Tabs>
     </>
   );

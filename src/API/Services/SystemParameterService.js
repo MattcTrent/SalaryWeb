@@ -1,9 +1,15 @@
 import { variables } from "../Variables.js"
+import axios from 'axios';
 
 export class SystemParameterService {
     
-    static getSystemParameter() {
-    return fetch(variables.API_URL + "/SystemParameters")
-      .then(response => response.json());
+    static async getSystemParameters () {
+      return await axios.get(variables.API_URL + "/SystemParameters").catch((error) => {
+        console.log("Error: ", error)});
   };
+
+  static async getSystemParameter (systemParameterId) {
+    return await axios.get(variables.API_URL + "/SystemParameters/"+systemParameterId).catch((error) => {
+      console.log("Error: ", error)});
+};
 }

@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { systemParameterReducer } from '../Reducers/SystemParameterReducer';
+import { getSystemParameters, selectSystemParameter } from '../Reducers/SystemParameterReducer';
 
 export const store = configureStore({
     reducer: {
-        allSystemParameters: systemParameterReducer
+        allSystemParameters: getSystemParameters,
+        selectedSystemParameter: selectSystemParameter
     }
 });
 

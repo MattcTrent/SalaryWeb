@@ -9,6 +9,11 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+
 export default function ConfirmModal({ showModal, modalAction, systemParameter, onClose }) {
 
 
@@ -59,20 +64,53 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter, 
                                                     <TableCell align="Left"></TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell align="Left">Name: </TableCell>
+                                                    <TableCell align="Left">Name </TableCell>
                                                     <TableCell align="Left"></TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell align="Left">Rate: </TableCell>
-                                                    <TableCell align="Left">%</TableCell>
+                                                    <TableCell align="Left">Rate </TableCell>
+                                                    <TableCell align="Left">
+                                                        <FormControl fullWidth >
+                                                            <InputLabel htmlFor="outlined-adornment-amount">Percent</InputLabel>
+                                                            <OutlinedInput
+                                                                id="outlined-adornment-amount"
+                                                                /*onChange={handleChange('amount')}*/
+                                                                endAdornment={<InputAdornment position="start">%</InputAdornment>}
+                                                                label="Amount"
+                                                                type="number"
+                                                            />
+                                                        </FormControl>
+                                                    </TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell align="Left">Lower Threshold: </TableCell>
-                                                    <TableCell align="Left">£</TableCell>
+                                                    <TableCell align="Left">Lower Threshold </TableCell>
+                                                    <TableCell align="Left">
+                                                        <FormControl fullWidth >
+                                                            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                                                            <OutlinedInput
+                                                                id="outlined-adornment-amount"
+                                                                /*onChange={handleChange('amount')}*/
+                                                                startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                                                                label="Amount"
+                                                                type="number"
+                                                            />
+                                                        </FormControl>
+                                                    </TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell align="Left">Upper Threshold: </TableCell>
-                                                    <TableCell align="Left">£</TableCell>
+                                                    <TableCell align="Left">Upper Threshold </TableCell>
+                                                    <TableCell align="Left">
+                                                        <FormControl fullWidth >
+                                                            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                                                            <OutlinedInput
+                                                                id="outlined-adornment-amount"
+                                                                /*onChange={handleChange('amount')}*/
+                                                                startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                                                                label="Amount"
+                                                                type="number"
+                                                            />
+                                                        </FormControl>
+                                                    </TableCell>
                                                 </TableRow>
                                             </TableBody>
                                         </Table>
@@ -82,24 +120,60 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter, 
                                         <Table aria-label="updateParamTable" >
                                             <TableBody>
                                                 <TableRow>
-                                                    <TableCell align="Left">Group: </TableCell>
+                                                    <TableCell align="Left">Group </TableCell>
                                                     <TableCell align="Left">{systemParameter.group ?? null}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell align="Left">Name: </TableCell>
+                                                    <TableCell align="Left">Name </TableCell>
                                                     <TableCell align="Left">{systemParameter.name ?? null}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell align="Left">Rate: </TableCell>
-                                                    <TableCell align="Left">{systemParameter.rate ?? null}%</TableCell>
+                                                    <TableCell align="Left">Rate </TableCell>
+                                                    <TableCell align="Left">
+                                                        <FormControl fullWidth >
+                                                            <InputLabel htmlFor="outlined-adornment-amount">Percent</InputLabel>
+                                                            <OutlinedInput
+                                                                id="outlined-adornment-amount"
+                                                                value={systemParameter.rate}
+                                                                /*onChange={handleChange('amount')}*/
+                                                                endAdornment={<InputAdornment position="start">%</InputAdornment>}
+                                                                label="Amount"
+                                                                type="number"
+                                                            />
+                                                        </FormControl>
+                                                    </TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell align="Left">Lower Threshold: </TableCell>
-                                                    <TableCell align="Left">£{systemParameter.lowerThreshold ?? null}</TableCell>
+                                                    <TableCell align="Left">Lower Threshold </TableCell>
+                                                    <TableCell align="Left">
+                                                        <FormControl fullWidth >
+                                                            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                                                            <OutlinedInput
+                                                                id="outlined-adornment-amount"
+                                                                value={systemParameter.lowerThreshold}
+                                                                /*onChange={handleChange('amount')}*/
+                                                                startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                                                                label="Amount"
+                                                                type="number"
+                                                            />
+                                                        </FormControl>
+                                                    </TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell align="Left">Upper Threshold: </TableCell>
-                                                    <TableCell align="Left">£{systemParameter.upperThreshold ?? null}</TableCell>
+                                                    <TableCell align="Left">Upper Threshold </TableCell>
+                                                    <TableCell align="Left">
+                                                        <FormControl fullWidth >
+                                                            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                                                            <OutlinedInput
+                                                                id="outlined-adornment-amount"
+                                                                value={systemParameter.upperThreshold}
+                                                                /*onChange={handleChange('amount')}*/
+                                                                startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                                                                label="Amount"
+                                                                type="number"
+                                                            />
+                                                        </FormControl>
+                                                    </TableCell>
                                                 </TableRow>
                                             </TableBody>
                                         </Table>

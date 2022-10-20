@@ -1,0 +1,10 @@
+.ModalWrapper {
+    width: 600px;
+    height: 400px;
+    position: relative;
+    z-index: 10;
+    border-radius: 10px;
+    border: 2px, solid, black;
+    display: grid;
+    background-color: white;
+}

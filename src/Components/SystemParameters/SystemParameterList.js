@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { variables } from '../../API/Variables.js';
 import { setSystemParameters } from '../../Redux/Actions/SystemParameterActions.js';
 import { MdDelete } from "react-icons/md"
@@ -16,8 +16,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import ConfirmModal from "../Modals/ConfirmModal.js";
 
 export const SystemParameterList = () => {
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalAction, setModalAction] = useState("");
 
   const systemParameters = useSelector((state) => state.allSystemParameters.systemParameters);
   const dispatch = useDispatch();
@@ -31,56 +35,78 @@ export const SystemParameterList = () => {
     dispatch(setSystemParameters(response.data));
   };
 
+
+  //useEffect and useDispatch causing infinite loop, must fix
   useEffect(() => {
     fetchSystemParameters();
   });
 
-  const onClickEdit = (e) => {
+  const openModal = (action) => {
+    setModalAction(action);
+    setShowModal(!showModal);
+  }
+
+  const onClick = (action, e) => {
+    openModal(action);
     console.log("ID", e);
-    return alert("Clicked: "+ e);
   };
 
-  const onClickDelete = (e) => {
-
-    return alert("Clicked: "+ e);
-  };
-  
-  const onClickCreate = (e) => {
-
-    return alert("Clicked: "+ e);
-  };
-  
-  const onClickExport = (e) => {
-
-    return alert("Clicked: "+ e);
-  };
-
-  const sxStyle =
+  const sxButtonStyle =
   {
-    color:"white", 
+    color:"white",
     ":hover": 
     { 
-      color:"red"
+      color:"black",
+      backgroundColor:"#625D5D"
     }
+  }
+
+  
+  const sxCellButtonStyle =
+  {
+    color:"black",
+    ":hover": 
+    { 
+      backgroundColor:"#8D918D"
+    }
+  }
+
+  const sxRowStyle =
+  {
+     '&:last-child td, &:last-child th': { border: 0 },
+     ":hover": 
+     { 
+       color:"black"
+     },
+     minHeight: 20,
+     Height: 20,
+     padding:0, margin:0,
+  }
+
+  const sxCellStyle =
+  {
+     minHeight: 20,
+     Height: 20,
+     padding:1, 
   }
 
   return (
     <>
         <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650}} aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead>
-            <TableRow sx={{ backgroundColor: "black" }}>
-                <TableCell align="center"><Button sx={sxStyle} onClick={onClickCreate}><IoMdCreate size={25} /> New</Button></TableCell>
-                <TableCell align="center"><Button sx={{color:"white", ":hover": { color:"red"}}} onClick={onClickExport}><BiExport size={25} /> Export</Button></TableCell>
+            <TableRow sx={{ backgroundColor: "#36454F" }}>
+                <TableCell sx={{ Width: 10, maxWidth: 10,}} align="left"><Button sx={sxButtonStyle} onClick={() => onClick("create")}><IoMdCreate size={25} /> New</Button></TableCell>
+                <TableCell align="left"><Button sx={sxButtonStyle} onClick={() => onClick("export")}><BiExport size={25} /> Export</Button></TableCell>
             </TableRow>
           </TableHead>
         </Table>
       </TableContainer>
 
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="simple table" >
           <TableHead>
-            <TableRow sx={{ backgroundColor: "black" }}>
+            <TableRow sx={{ backgroundColor: "#25383C" }}>
               <TableCell align="center"></TableCell>
               <TableCell sx={{ color: "White", fontWeight: "Bold" }} align="left">Group</TableCell>
               <TableCell sx={{ color: "White", fontWeight: "Bold" }} align="left">Name</TableCell>
@@ -92,22 +118,20 @@ export const SystemParameterList = () => {
           </TableHead>
           <TableBody>
             {systemParameters.map((parameter) => (
-              <TableRow
-                key={parameter.group + parameter.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align="center"><Button sx={{color:"black"}} onClick={() => onClickEdit(parameter.id)}><BiEdit size={25} /></Button></TableCell>
-                <TableCell align="left">{parameter.group}</TableCell>
-                <TableCell align="left" component="th" scope="row"> {parameter.name}</TableCell>
-                <TableCell align="left">{parameter.rate}</TableCell>
-                <TableCell align="left">{parameter.lowerThreshold}</TableCell>
-                <TableCell align="left">{parameter.upperThreshold}</TableCell>
-                <TableCell align="center"><Button sx={{color:"black"}} onClick={onClickDelete}><MdDelete size={25} /></Button></TableCell>
+              <TableRow key={parameter.group + parameter.name} sx={sxRowStyle}>
+                <TableCell sx={sxCellStyle} align="center"><Button sx={sxCellButtonStyle} onClick={() => onClick("edit", parameter.id)}><BiEdit size={25} /></Button></TableCell>
+                <TableCell sx={sxCellStyle} align="left">{parameter.group}</TableCell>
+                <TableCell sx={sxCellStyle} align="left" component="th" scope="row"> {parameter.name}</TableCell>
+                <TableCell sx={sxCellStyle} align="left">{parameter.rate}</TableCell>
+                <TableCell sx={sxCellStyle} align="left">{parameter.lowerThreshold}</TableCell>
+                <TableCell sx={sxCellStyle} align="left">{parameter.upperThreshold}</TableCell>
+                <TableCell sx={sxCellStyle} align="center"><Button sx={sxCellButtonStyle} onClick={() => onClick("delete", parameter.id)}><MdDelete size={25} /></Button></TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      <ConfirmModal showModal={showModal} setShowModal={setShowModal} modalAction={modalAction}/>
     </>
   )
 }

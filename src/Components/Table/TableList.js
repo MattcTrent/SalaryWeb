@@ -10,7 +10,7 @@ export const TableList = () => {
       <div className="table-Containor">
         <h2 className="PageHeader">Salary Breakdown</h2>
         {salaries.map((salary) =>
-              <SalaryTable person={salary} />
+              <SalaryTable key={salary.id} person={salary} />
         )}
       </div>
     )

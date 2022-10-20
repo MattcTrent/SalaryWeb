@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./ConfirmModal.css";
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
 
-export default function ConfirmModal({ showModal, setShowModal, modalAction, systemParameter, onClose }) {
+export default function ConfirmModal({ showModal, modalAction, systemParameter, onClose }) {
 
 
     const style = {
@@ -47,21 +51,59 @@ export default function ConfirmModal({ showModal, setShowModal, modalAction, sys
                                 < h2 > {modalAction.charAt(0).toUpperCase() + modalAction.slice(1).toLowerCase() ?? null} System Parameter {null} {null}</h2 >
 
                                 {modalAction === "create" ?
-                                <>
-                                    <div>Group:</div>
-                                    <div>Name:</div>
-                                    <div>Rate:</div>
-                                    <div>Lower Threshold:</div>
-                                    <div>Upper Threshold: </div>
-                                </>
-                                :
-                                <>
-                                    <div>Group: {systemParameter.group ?? null}</div>
-                                    <div>Name: {systemParameter.name ?? null}</div>
-                                    <div>Rate: {systemParameter.rate ?? null}%</div>
-                                    <div>Lower Threshold: £{systemParameter.lowerThreshold ?? null}</div>
-                                    <div>Upper Threshold: £{systemParameter.upperThreshold ?? null}</div>
-                                </>}
+                                    <>
+                                        <Table aria-label="createParamTable" >
+                                            <TableBody>
+                                                <TableRow>
+                                                    <TableCell align="Left">Group: </TableCell>
+                                                    <TableCell align="Left"></TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align="Left">Name: </TableCell>
+                                                    <TableCell align="Left"></TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align="Left">Rate: </TableCell>
+                                                    <TableCell align="Left">%</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align="Left">Lower Threshold: </TableCell>
+                                                    <TableCell align="Left">£</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align="Left">Upper Threshold: </TableCell>
+                                                    <TableCell align="Left">£</TableCell>
+                                                </TableRow>
+                                            </TableBody>
+                                        </Table>
+                                    </>
+                                    :
+                                    <>
+                                        <Table aria-label="updateParamTable" >
+                                            <TableBody>
+                                                <TableRow>
+                                                    <TableCell align="Left">Group: </TableCell>
+                                                    <TableCell align="Left">{systemParameter.group ?? null}</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align="Left">Name: </TableCell>
+                                                    <TableCell align="Left">{systemParameter.name ?? null}</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align="Left">Rate: </TableCell>
+                                                    <TableCell align="Left">{systemParameter.rate ?? null}%</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align="Left">Lower Threshold: </TableCell>
+                                                    <TableCell align="Left">£{systemParameter.lowerThreshold ?? null}</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                    <TableCell align="Left">Upper Threshold: </TableCell>
+                                                    <TableCell align="Left">£{systemParameter.upperThreshold ?? null}</TableCell>
+                                                </TableRow>
+                                            </TableBody>
+                                        </Table>
+                                    </>}
                                 <Button onClick={() => onClick(modalAction, systemParameter.id ?? null)}>Save</Button>
                                 <Button onClick={() => onClick("cancel")}>Cancel</Button>
                             </>

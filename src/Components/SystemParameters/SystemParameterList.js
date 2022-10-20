@@ -65,9 +65,7 @@ export const SystemParameterList = () => {
 
   
   const onClickClose = () => {
-    dispatch(selectSystemParameter({
-      systemParameters: []
-  }));
+    dispatch(selectSystemParameter({ systemParameters: [] }));
     setShowModal(!showModal);
   };
 

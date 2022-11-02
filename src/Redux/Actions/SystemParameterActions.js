@@ -28,9 +28,20 @@ export const updateSystemParameter = (systemParameter) => {
     }
 }
 
-export const deleteSystemParameter = (systemParameter) => {
+export const deleteSystemParameter = () => {
     return {
         type : ActionTypes.DELETE_SYSTEM_PARAMETER,
-        payload: systemParameter
+    }
+}
+
+export const removeSelectedSystemParameter = () => {
+    return {
+        type : ActionTypes.REMOVE_SELECTED_SYSTEM_PARAMETER,
+    }
+}
+
+export const updateSelectedSystemParameter = () => {
+    return {
+        type : ActionTypes.UPDATE_SELECTED_SYSTEM_PARAMETER,
     }
 }

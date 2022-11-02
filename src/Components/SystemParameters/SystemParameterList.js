@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react';
-import { selectSystemParameter, getSystemParameters } from '../../Redux/Actions/SystemParameterActions.js';
+import { selectSystemParameter, removeSelectedSystemParameter, getSystemParameters } from '../../Redux/Actions/SystemParameterActions.js';
 import { MdDelete } from "react-icons/md"
 import { BiEdit } from "react-icons/bi"
 import { IoMdCreate } from "react-icons/io"
 import { BiExport } from "react-icons/bi"
+import { HiRefresh } from "react-icons/hi"
 import { sxCellStyle, sxButtonStyle, sxCellButtonStyle, sxRowStyle } from "./SystemParameterSXOverrides.js";
 
 import Table from '@mui/material/Table';
@@ -65,7 +66,7 @@ export const SystemParameterList = () => {
 
   
   const onClickClose = () => {
-    dispatch(selectSystemParameter({ systemParameters: [] }));
+    dispatch(removeSelectedSystemParameter());
     setShowModal(!showModal);
   };
 
@@ -77,6 +78,7 @@ export const SystemParameterList = () => {
             <TableRow sx={{ backgroundColor: "#36454F" }}>
               <TableCell sx={{ Width: 10, maxWidth: 10, }} align="left"><Button sx={sxButtonStyle} onClick={() => onClickOpen("create")}><IoMdCreate size={25} /> New</Button></TableCell>
               <TableCell align="left"><Button sx={sxButtonStyle} onClick={() => onClickOpen("export")}><BiExport size={25} /> Export</Button></TableCell>
+              <TableCell align="right"><Button sx={sxButtonStyle} onClick={() => onClickOpen("export")}><HiRefresh size={25} /> Refresh</Button></TableCell>
             </TableRow>
           </TableHead>
         </Table>
@@ -98,7 +100,7 @@ export const SystemParameterList = () => {
           <TableBody>
             {systemParameters.map((parameter) => (
               <TableRow key={parameter.group + parameter.name} sx={sxRowStyle}>
-                <TableCell sx={sxCellStyle} align="center"><Button sx={sxCellButtonStyle} onClick={() => onClickOpen("update", parameter.id)}><BiEdit size={25} /></Button></TableCell>
+                <TableCell sx={sxCellStyle} align="center"><Button sx={sxCellButtonStyle} onClick={() => onClickOpen("edit", parameter.id)}><BiEdit size={25} /></Button></TableCell>
                 <TableCell sx={sxCellStyle} align="left">{parameter.group}</TableCell>
                 <TableCell sx={sxCellStyle} align="left" component="th" scope="row"> {parameter.name}</TableCell>
                 <TableCell sx={sxCellStyle} align="left">{parameter.rate}</TableCell>

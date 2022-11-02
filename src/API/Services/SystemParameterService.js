@@ -1,12 +1,5 @@
 import { variables } from "../Variables.js"
-import { QueryClient, useQuery } from 'react-query';
 import axios from 'axios';
-
-export const useQuerySystemParameters = () => 
-  useQuery(
-    ['query-get-System-Parameters'], 
-    () => SystemParameterService.getSystemParameters(), 
-    { staleTime: 3000 });
 
 export class SystemParameterService {
 
@@ -14,10 +7,6 @@ export class SystemParameterService {
     return await axios.get(variables.API_URL + "/SystemParameters").catch((error) => {
       console.log("Error: ", error)
     });
-  };
-
-  static async refreshSystemParameters(queryClient) {
-    queryClient.InvalidateQueries(['query-get-System-Parameters'])
   };
 
   static async getSystemParameter(systemParameterId) {

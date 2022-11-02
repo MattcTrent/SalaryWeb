@@ -24,7 +24,7 @@ export const SystemParameterList = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalAction, setModalAction] = useState("");
 
-  const systemParameters = useSelector((state) => state.allSystemParameters.systemParameters);
+  const systemParameters = useSelector((state) => state.allSystemParameters);
   const selSystemParameter = useSelector((state) => state.selectedSystemParameter);
   const dispatch = useDispatch();
 
@@ -68,7 +68,14 @@ export const SystemParameterList = () => {
   const onClickClose = () => {
     dispatch(removeSelectedSystemParameter());
     setShowModal(!showModal);
+    RefreshPage();
   };
+
+  const RefreshPage = () => {
+    console.log("Refresh");
+    fetchSystemParameters();
+    window.location.reload();
+  }
 
   return (
     <>
@@ -78,7 +85,7 @@ export const SystemParameterList = () => {
             <TableRow sx={{ backgroundColor: "#36454F" }}>
               <TableCell sx={{ Width: 10, maxWidth: 10, }} align="left"><Button sx={sxButtonStyle} onClick={() => onClickOpen("create")}><IoMdCreate size={25} /> New</Button></TableCell>
               <TableCell align="left"><Button sx={sxButtonStyle} onClick={() => onClickOpen("export")}><BiExport size={25} /> Export</Button></TableCell>
-              <TableCell align="right"><Button sx={sxButtonStyle} onClick={() => onClickOpen("export")}><HiRefresh size={25} /> Refresh</Button></TableCell>
+              <TableCell align="right"><Button sx={sxButtonStyle} onClick={() => RefreshPage()}><HiRefresh size={25} /> Refresh</Button></TableCell>
             </TableRow>
           </TableHead>
         </Table>
@@ -98,7 +105,7 @@ export const SystemParameterList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {systemParameters.map((parameter) => (
+            {systemParameters.systemParameters.map((parameter) => (
               <TableRow key={parameter.group + parameter.name} sx={sxRowStyle}>
                 <TableCell sx={sxCellStyle} align="center"><Button sx={sxCellButtonStyle} onClick={() => onClickOpen("edit", parameter.id)}><BiEdit size={25} /></Button></TableCell>
                 <TableCell sx={sxCellStyle} align="left">{parameter.group}</TableCell>

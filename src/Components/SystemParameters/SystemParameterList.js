@@ -18,6 +18,8 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import ConfirmModal from "../Modals/ConfirmModal.js";
 import { SystemParameterService } from "../../API/Services/SystemParameterService.js";
+import { useQueryClient } from "react-query";
+
 
 export const SystemParameterList = () => {
 
@@ -36,12 +38,20 @@ export const SystemParameterList = () => {
     });
   };
 
-
   const fetchSystemParameter = async (systemParameterId, action) => {
     SystemParameterService.getSystemParameter(systemParameterId).then((response) => {
       if (response.data) {
         dispatch(selectSystemParameter(response.data));
         openModal(action);
+      }
+    });
+  };
+
+  const queryClient = useQueryClient();
+  const refreshSystemParameters = async () => {
+    SystemParameterService.refreshSystemParameters(queryClient).then((response) => {
+      if (response.data) {
+        dispatch(getSystemParameters(response.data));
       }
     });
   };
@@ -68,6 +78,7 @@ export const SystemParameterList = () => {
   const onClickClose = () => {
     dispatch(removeSelectedSystemParameter());
     setShowModal(!showModal);
+    refreshSystemParameters();
   };
 
   return (

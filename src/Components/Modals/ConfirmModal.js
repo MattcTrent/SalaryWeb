@@ -99,8 +99,8 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                     <Table aria-label="updateParamTable" >
                                         <TableBody>
                                             <TableRow>
-                                                <TableCell align="Left">Group </TableCell>
-                                                <TableCell align="Left">
+                                                <TableCell align="left">Group </TableCell>
+                                                <TableCell align="left">
                                                     <TextField
                                                         required
                                                         id="outlined-required"
@@ -114,8 +114,8 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 </TableCell>
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell align="Left">Name </TableCell>
-                                                <TableCell align="Left">
+                                                <TableCell align="left">Name </TableCell>
+                                                <TableCell align="left">
                                                     <TextField
                                                         required
                                                         id="outlined-required"
@@ -129,8 +129,8 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 </TableCell>
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell align="Left">Rate </TableCell>
-                                                <TableCell align="Left">
+                                                <TableCell align="left">Rate </TableCell>
+                                                <TableCell align="left">
                                                     <FormControl fullWidth >
                                                         <InputLabel htmlFor="outlined-adornment-amount">Percent</InputLabel>
                                                         <OutlinedInput
@@ -145,8 +145,8 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 </TableCell>
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell align="Left">Lower Threshold </TableCell>
-                                                <TableCell align="Left">
+                                                <TableCell align="left">Lower Threshold </TableCell>
+                                                <TableCell align="left">
                                                     <FormControl fullWidth >
                                                         <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
                                                         <OutlinedInput
@@ -161,8 +161,8 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 </TableCell>
                                             </TableRow>
                                             <TableRow>
-                                                <TableCell align="Left">Upper Threshold </TableCell>
-                                                <TableCell align="Left">
+                                                <TableCell align="left">Upper Threshold </TableCell>
+                                                <TableCell align="left">
                                                     <FormControl fullWidth >
                                                         <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
                                                         <OutlinedInput

@@ -1,12 +1,12 @@
 import { variables } from "../Variables.js"
-import { QueryClient, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import axios from 'axios';
 
 export const useQuerySystemParameters = () => 
   useQuery(
     ['query-get-System-Parameters'], 
     () => SystemParameterService.getSystemParameters(), 
-    { staleTime: 3000 });
+    { staleTime: 300000 });
 
 export class SystemParameterService {
 
@@ -23,7 +23,7 @@ export class SystemParameterService {
   };
   
   static async refreshSystemParameters(queryClient) {
-    queryClient.InvalidateQueries(['query-get-System-Parameters'])
+    queryClient.invalidateQueries(['query-get-System-Parameters'])
   };
 
   static async createSystemParameter(systemParameter) {

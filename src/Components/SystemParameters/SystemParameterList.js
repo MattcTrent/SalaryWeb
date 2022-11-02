@@ -49,11 +49,9 @@ export const SystemParameterList = () => {
 
   const queryClient = useQueryClient();
   const refreshSystemParameters = async () => {
-    SystemParameterService.refreshSystemParameters(queryClient).then((response) => {
-      if (response.data) {
-        dispatch(getSystemParameters(response.data));
-      }
-    });
+    SystemParameterService.refreshSystemParameters(queryClient);
+
+    fetchSystemParameters()
   };
 
   useEffect(() => {

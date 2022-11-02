@@ -49,7 +49,7 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
             });
         }
         else if (action === "create") {
-            SystemParameterService.cre(systemParam).then((response) => {
+            SystemParameterService.createSystemParameter(systemParam).then((response) => {
                 if (response.data) {
                     console.log("Success")
                 }

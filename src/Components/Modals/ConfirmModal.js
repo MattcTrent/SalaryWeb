@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from 'react';
 import "./ConfirmModal.css";
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -18,8 +19,10 @@ import { SystemParameterService } from "../../API/Services/SystemParameterServic
 import cloneDeep from 'lodash/cloneDeep';
 
 export default function ConfirmModal({ showModal, modalAction, systemParameter: loadedSystemParameter, onClose }) {
-
+    
     const systemParam = cloneDeep(loadedSystemParameter);
+    const [groupMissing, setGroupMissing] = useState(systemParam.group == null);
+    const [nameMissing, setNameMissing] = useState(systemParam.name == null);
 
     const style = {
         position: 'absolute',
@@ -63,9 +66,11 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
         switch (propChanged) {
             case "group":
                 systemParam.group = event.target.value;
+                setGroupMissing(systemParam.group == null || systemParam.group === "");
                 break;
             case "name":
                 systemParam.name = event.target.value;
+                setNameMissing(systemParam.name == null || systemParam.name === "");
                 break;
             case "rate":
                 systemParam.rate = parseFloat(event.target.value).toFixed(2);
@@ -102,8 +107,9 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 <TableCell align="left">Group </TableCell>
                                                 <TableCell align="left">
                                                     <TextField
+                                                        id="inpGroup"
                                                         required
-                                                        id="outlined-required"
+                                                        error={groupMissing}
                                                         label="Required"
                                                         defaultValue={systemParam.group ?? null}
                                                         onChange={handleChange('group')}
@@ -117,8 +123,9 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 <TableCell align="left">Name </TableCell>
                                                 <TableCell align="left">
                                                     <TextField
+                                                        id="inpName"
                                                         required
-                                                        id="outlined-required"
+                                                        error={nameMissing}
                                                         label="Required"
                                                         defaultValue={systemParam.name ?? null}
                                                         onChange={handleChange('name')}
@@ -132,9 +139,10 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 <TableCell align="left">Rate </TableCell>
                                                 <TableCell align="left">
                                                     <FormControl fullWidth >
-                                                        <InputLabel htmlFor="outlined-adornment-amount">Percent</InputLabel>
+                                                        <InputLabel >Percent</InputLabel>
                                                         <OutlinedInput
-                                                            id="outlined-adornment-amount"
+                                                            id="inpRate"
+                                                            required
                                                             defaultValue={systemParam.rate}
                                                             onChange={handleChange('rate')}
                                                             endAdornment={<InputAdornment position="start">%</InputAdornment>}
@@ -148,9 +156,9 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 <TableCell align="left">Lower Threshold </TableCell>
                                                 <TableCell align="left">
                                                     <FormControl fullWidth >
-                                                        <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                                                        <InputLabel >Amount</InputLabel>
                                                         <OutlinedInput
-                                                            id="outlined-adornment-amount"
+                                                            id="inpLowerThreshold"
                                                             defaultValue={systemParam.lowerThreshold}
                                                             onChange={handleChange('lowerThreshold')}
                                                             startAdornment={<InputAdornment position="start">£</InputAdornment>}
@@ -164,9 +172,9 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 <TableCell align="left">Upper Threshold </TableCell>
                                                 <TableCell align="left">
                                                     <FormControl fullWidth >
-                                                        <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                                                        <InputLabel>Amount</InputLabel>
                                                         <OutlinedInput
-                                                            id="outlined-adornment-amount"
+                                                            id="inpUpperThreshold"
                                                             defaultValue={systemParam.upperThreshold}
                                                             onChange={handleChange("upperThreshold")}
                                                             startAdornment={<InputAdornment position="start">£</InputAdornment>}

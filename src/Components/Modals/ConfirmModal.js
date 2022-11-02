@@ -19,7 +19,7 @@ import { SystemParameterService } from "../../API/Services/SystemParameterServic
 import cloneDeep from 'lodash/cloneDeep';
 
 export default function ConfirmModal({ showModal, modalAction, systemParameter: loadedSystemParameter, onClose }) {
-    
+
     const systemParam = cloneDeep(loadedSystemParameter);
     const [groupMissing, setGroupMissing] = useState(systemParam.group == null);
     const [nameMissing, setNameMissing] = useState(systemParam.name == null);
@@ -35,32 +35,61 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
         boxShadow: 24,
         p: 4,
     };
-    
+
     const onClick = (action, e) => {
-        if (action === "delete") {
-            SystemParameterService.deleteSystemParameter(e).then((response) => {
-                if (response.data) {
-                    console.log("Success")
-                }
-            });
+        if (action === "cancel") {
+            onClose(action, e)
         }
-        else if (action === "edit") {
-            SystemParameterService.updateSystemParameter(e, systemParam).then((response) => {
-                if (response.data) {
-                    console.log("Success")
-                }
-            });
+        else if (!PassValidation()) {
+            if (action === "delete") {
+                SystemParameterService.deleteSystemParameter(e).then((response) => {
+                    if (response.data) {
+                        console.log("Success")
+                    }
+                });
+            }
+            else if (action === "edit") {
+                SystemParameterService.updateSystemParameter(e, systemParam).then((response) => {
+                    if (response.data) {
+                        console.log("Success")
+                    }
+                });
+            }
+            else if (action === "create") {
+                SystemParameterService.createSystemParameter(systemParam).then((response) => {
+                    if (response.data) {
+                        console.log("Success")
+                    }
+                });
+            }
+
+            onClose(action, e)
         }
-        else if (action === "create") {
-            SystemParameterService.createSystemParameter(systemParam).then((response) => {
-                if (response.data) {
-                    console.log("Success")
-                }
-            });
+    };
+
+    const PassValidation = () => {
+        let error = false;
+        let message = "";
+        if (systemParam.group == null || systemParam.group === "") {
+            error = true;
+            message += "Group, ";
+        }
+        if (systemParam.name == null || systemParam.name === "") {
+            error = true;
+            message += "Name, ";
         }
 
-        onClose(action, e)
-    };
+        
+        if ((systemParam.rate == null || systemParam.rate === "") && (systemParam.lowerThreshold == null || systemParam.lowerThreshold === "") && (systemParam.upperThreshold == null || systemParam.upperThreshold === "")) {
+            error = true;
+            message += "At least one Rate or Threshold is required. ";
+        }
+
+        if (message !== "") {
+            alert("Require Properies: \n"+ message);
+        }
+        return error;
+    }
 
     const handleChange = (propChanged) => (event) => {
         switch (propChanged) {
@@ -82,7 +111,7 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                 systemParam.upperThreshold = parseFloat(event.target.value).toFixed(2);
                 break;
             default:
-        };        
+        };
     }
 
     return (
@@ -108,6 +137,7 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 <TableCell align="left">
                                                     <TextField
                                                         id="inpGroup"
+                                                        name="group"
                                                         required
                                                         error={groupMissing}
                                                         label="Required"
@@ -124,6 +154,7 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                 <TableCell align="left">
                                                     <TextField
                                                         id="inpName"
+                                                        name="name"
                                                         required
                                                         error={nameMissing}
                                                         label="Required"
@@ -142,6 +173,7 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                         <InputLabel >Percent</InputLabel>
                                                         <OutlinedInput
                                                             id="inpRate"
+                                                            name="rate"
                                                             required
                                                             defaultValue={systemParam.rate}
                                                             onChange={handleChange('rate')}
@@ -159,6 +191,7 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                         <InputLabel >Amount</InputLabel>
                                                         <OutlinedInput
                                                             id="inpLowerThreshold"
+                                                            name="lowerThreshold"
                                                             defaultValue={systemParam.lowerThreshold}
                                                             onChange={handleChange('lowerThreshold')}
                                                             startAdornment={<InputAdornment position="start">£</InputAdornment>}
@@ -175,6 +208,7 @@ export default function ConfirmModal({ showModal, modalAction, systemParameter: 
                                                         <InputLabel>Amount</InputLabel>
                                                         <OutlinedInput
                                                             id="inpUpperThreshold"
+                                                            name="upperThreshold"
                                                             defaultValue={systemParam.upperThreshold}
                                                             onChange={handleChange("upperThreshold")}
                                                             startAdornment={<InputAdornment position="start">£</InputAdornment>}
